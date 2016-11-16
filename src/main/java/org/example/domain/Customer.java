@@ -1,7 +1,11 @@
 package org.example.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 @Entity
@@ -13,6 +17,9 @@ public class Customer {
   String name;
 
   String notes;
+  
+  @OneToMany(cascade = CascadeType.ALL)
+  List<Bill> bills;
 
   @Version
   Long version;
@@ -54,6 +61,14 @@ public class Customer {
 
   public void setVersion(Long version) {
     this.version = version;
+  }
+
+  public List<Bill> getBills() {
+	return bills;
+  }
+
+  public void setBills(List<Bill> bills) {
+	this.bills = bills;
   }
 
 }
